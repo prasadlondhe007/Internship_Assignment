@@ -1,69 +1,68 @@
-function login() {
-    let email = document.getElementById("loginEmail").value;
-    let password = document.getElementById("loginPassword").value;
+function registerUser() {
+    let name = rName.value.trim();
+    let email = rEmail.value.trim();
+    let phone = rPhone.value.trim();
+    let pass = rPass.value.trim();
     let valid = true;
 
-    document.getElementById("loginEmailError").innerHTML = "";
-    document.getElementById("loginPasswordError").innerHTML = "";
-
-    if (email === "") {
-        document.getElementById("loginEmailError").innerHTML = "Email is required";
-        valid = false;
-    } else if (!email.includes("@")) {
-        document.getElementById("loginEmailError").innerHTML = "Invalid email format";
-        valid = false;
-    }
-
-    if (password === "") {
-        document.getElementById("loginPasswordError").innerHTML = "Password is required";
-        valid = false;
-    } else if (password.length < 6) {
-        document.getElementById("loginPasswordError").innerHTML = "Password must be at least 6 characters";
-        valid = false;
-    }
-
-    if (valid) {
-        alert("Login Successful");
-        window.location.href = "register.html"; // 🔥 Redirect
-    }
-}
-
-function register() {
-    let name = document.getElementById("regName").value;
-    let email = document.getElementById("regEmail").value;
-    let phone = document.getElementById("regPhone").value;
-    let password = document.getElementById("regPassword").value;
-    let valid = true;
-
-    document.querySelectorAll(".error").forEach(e => e.innerHTML = "");
+    clearRegisterErrors();
 
     if (name === "") {
-        document.getElementById("regNameError").innerHTML = "Name is required";
+        rNameErr.innerText = "Name is required";
         valid = false;
     }
 
-    if (email === "") {
-        document.getElementById("regEmailError").innerHTML = "Email is required";
-        valid = false;
-    } else if (!email.includes("@")) {
-        document.getElementById("regEmailError").innerHTML = "Invalid email format";
+    if (!email.includes("@")) {
+        rEmailErr.innerText = "Invalid email";
         valid = false;
     }
 
-    if (!/^\d{10}$/.test(phone)) {
-        document.getElementById("regPhoneError").innerHTML = "Phone must be 10 digits";
+    if (!/^[0-9]{10}$/.test(phone)) {
+        rPhoneErr.innerText = "Phone must be 10 digits";
         valid = false;
     }
 
-    if (password === "") {
-        document.getElementById("regPasswordError").innerHTML = "Password is required";
-        valid = false;
-    } else if (password.length < 6) {
-        document.getElementById("regPasswordError").innerHTML = "Password must be at least 6 characters";
+    if (pass.length < 6) {
+        rPassErr.innerText = "Password must be 6 characters";
         valid = false;
     }
 
     if (valid) {
         alert("Registration Successful");
+        window.location.href = "login.html";
     }
+}
+
+function loginUser() {
+    let email = lEmail.value.trim();
+    let pass = lPass.value.trim();
+    let valid = true;
+
+    clearLoginErrors();
+
+    if (email === "") {
+        lEmailErr.innerText = "Email required";
+        valid = false;
+    }
+
+    if (pass.length < 6) {
+        lPassErr.innerText = "Invalid password";
+        valid = false;
+    }
+
+    if (valid) {
+        alert("Login Successful");
+    }
+}
+
+function clearRegisterErrors() {
+    rNameErr.innerText = "";
+    rEmailErr.innerText = "";
+    rPhoneErr.innerText = "";
+    rPassErr.innerText = "";
+}
+
+function clearLoginErrors() {
+    lEmailErr.innerText = "";
+    lPassErr.innerText = "";
 }
